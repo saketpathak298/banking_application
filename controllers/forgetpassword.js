@@ -7,23 +7,25 @@ const forgetCntrl = {}
 
 forgetCntrl.forgetPassword = async (req,res)=>{
     try{
-  
-      const {email}=req.body
-      // check email exits
-      const isEmailExit=await createAccountmodel.findOne({email})
-      if(isEmailExit){
-        return res.status(409).send("email already exits")
-      }
-        // const password=req.query.password
-        // await (await createAccountmodel.updateOne({password:password})).then((res)=>{
-        //  res.status(200).send("password updated successfully!")
-        // }).catch((err)=>{
-        //     res.status(500).send({
-        //         success:false,
-        //         msg:"something went wrong",
-        //         error:err
-        //         })
-        // })
+        const id=req.query.id
+        const name = req.body.name
+       await createAccountmodel.findByIdAndUpdate(id,name).then((response)=>{
+            // if(!response){
+            //     res.status(404).send({
+            //      lastname: "name not found with id " + req.query._id,
+            //     })
+            // }
+            res.status(200).send({
+                success:true,
+                data:response
+            })
+        }).catch((err)=>{
+            res.status(500).send({
+                success:false,
+                msg:"something went wrong",
+                error:err
+            })
+        })
         //  send email verification  to the user email
     
         // const MailID = await ejs.renderFile(process.env.SENDGRID_EMAIL)
