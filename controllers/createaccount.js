@@ -1,4 +1,5 @@
 const createSchemaModel = require('../modules/createaccount')
+const amountModel = require('../modules/amount')
 const bcrpt = require('bcrypt')
 const crypto=require('crypto')
 const createCntrl ={}
